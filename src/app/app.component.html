@@ -5,7 +5,7 @@
       <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
       <mat-icon *ngIf="drawer.opened">close</mat-icon>
     </button>   
-      <h1 class="example-app-name">ENVIOS UDEC</h1>
+      <h1 class="example-app-name">UDEC</h1>
 
 
       <span class="example-spacer"></span>
@@ -30,8 +30,6 @@
   
   <mat-drawer-container class="example-sidenav-content" autosize>
     <mat-drawer #drawer style="width: 200px" mode="side">
-
-        <img src="assets/udec_escudo.png" width="128" style="margin-left: 20px;" />
   
         <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/buscar']">
             <mat-icon>search</mat-icon>
