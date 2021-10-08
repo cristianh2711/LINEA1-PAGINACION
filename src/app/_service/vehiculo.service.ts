@@ -20,4 +20,8 @@ export class VehiculoService {
       return this.http.put(`${this.url}/editar`, vehiculo);
   }
 
+  public listarV(page: number, size:number){
+    return this.http.get<any>(`${this.url}/pageable?page=${page}&size=${size}`);
+  }
+
 }

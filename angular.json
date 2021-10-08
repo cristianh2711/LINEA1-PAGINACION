@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -125,6 +125,6 @@
   },
   "defaultProject": "lineaIII",
   "cli": {
-    "analytics": "973f52b5-9b32-4bd7-81ae-e040bc374d17"
+    "analytics": "43ab2798-a07e-448a-be41-ff49c72ad342"
   }
 }
