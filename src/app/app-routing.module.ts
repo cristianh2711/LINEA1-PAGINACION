@@ -6,6 +6,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
+import { AgregarVehiculoComponent } from '../app/pages/vehiculo/agregarvehiculo/agregarvehiculo.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,10 @@ const routes: Routes = [
        {path:  'ciudad/:idDep', component: CiudadComponent}
     ]
   },
-  {path: 'vehiculo', component: VehiculoComponent},
+  {path: 'vehiculo', component: VehiculoComponent,children:[
+
+    {path:'agregarVehiculo' , component: AgregarVehiculoComponent }
+  ]},
   {path: '**', component: BuscarComponent}
 ];
 

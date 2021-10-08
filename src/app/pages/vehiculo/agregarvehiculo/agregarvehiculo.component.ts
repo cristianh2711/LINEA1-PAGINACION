@@ -5,22 +5,36 @@ import { VehiculoService } from './../../../_service/vehiculo.service';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
 
 @Component({
-  selector: 'app-agregar-vehiculo',
-  templateUrl: './agregar-vehiculo.component.html',
-  styleUrls: ['./agregar-vehiculo.component.css']
+  selector: 'app-agregarvehiculo',
+  templateUrl: './agregarvehiculo.component.html',
+  styleUrls: ['./agregarvehiculo.component.css']
 })
 export class AgregarVehiculoComponent implements OnInit {
 
   private idVehiculo: number;
 
-  selectedItem: string;
+  selectedItem : string;
+  selectedItemTV : string;
   positions = [
-    { value: 'Ford' },
-    { value: 'Chevrolet' },
-    { value: 'Toyota' }
+    {value: 'Ford' },
+    {value: 'Chevrolet'},
+    {value: 'Toyota'},
+    {value: 'Mazda'},
+    {value: 'Renault'},
+    {value: 'Audi'},
+    {value: 'BMW'},
+    {value: 'Honda'},
+    {value: 'Jeep'},
+    {value: 'Nissan'},
+    {value: 'Suzuki'}
   ];
 
-
+  tipoVeh = [
+    {tipo: 'Deportivo'},
+    {tipo: 'Camioneta'},
+    {tipo: 'Automovil'},
+    {tipo: 'Campero'}
+  ]
 
   Vehform = this.fb.group({
     placa: ['', Validators.required],
@@ -37,7 +51,7 @@ export class AgregarVehiculoComponent implements OnInit {
 
   }
 
-  iniciarVacio() {
+  iniciarVacio(){
     this.Vehform = new FormGroup({
       'placa': new FormControl('', [Validators.required]),
       'modelo': new FormControl(0, [Validators.required]),
@@ -47,7 +61,7 @@ export class AgregarVehiculoComponent implements OnInit {
     });
   }
 
-  cargarData() {
+  cargarData(){
     this.serviceAgregarVehiculo.listarIdVeh(this.idVehiculo).subscribe(data => {
     });
   }
