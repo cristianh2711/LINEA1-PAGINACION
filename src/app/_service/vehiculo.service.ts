@@ -9,28 +9,24 @@ import { Vehiculo } from '../_model/Vehiculo';
 export class VehiculoService {
 
   private url: string = `${environment.HOST}/vehiculos`;
-  
+
   constructor(private http: HttpClient) { }
 
-  public guardar(vehiculo: Vehiculo){
-      return this.http.post(`${this.url}/guardar`, vehiculo);
+  public guardar(vehiculo: Vehiculo) {
+    return this.http.post(`${this.url}/guardar`, vehiculo);
   }
 
-  public editar(vehiculo: Vehiculo){
-      return this.http.put(`${this.url}/editar`, vehiculo);
+  public editar(vehiculo: Vehiculo) {
+    return this.http.put(`${this.url}/editar`, vehiculo);
   }
 
-<<<<<<< HEAD
-  public listarV(page: number, size:number){
+  public listarV(page: number, size: number) {
     return this.http.get<any>(`${this.url}/pageable?page=${page}&size=${size}`);
   }
 
-  listarIdVeh(id: number){
+  listarIdVeh(id: number) {
     return this.http.get<Vehiculo>(`${this.url}/listar/${id}`);
-=======
-  public listarV(){
-    return this.http.get<Vehiculo[]>(`${this.url}/listar`);
->>>>>>> a7d5171f6b51805290ff54a47afe352d56e57d82
   }
+
 
 }

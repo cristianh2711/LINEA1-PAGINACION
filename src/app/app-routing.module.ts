@@ -10,18 +10,20 @@ import { AgregarVehiculoComponent } from '../app/pages/vehiculo/agregarvehiculo/
 
 
 const routes: Routes = [
-  {path: 'buscar', component: BuscarComponent},
-  {path: 'ingresar', component: RegistroComponent},
-  {path: 'editar', component: EditarComponent},
-  {path: 'departamento', component: DepartamentoComponent, children :[
-       {path:  'ciudad/:idDep', component: CiudadComponent}
+  { path: 'buscar', component: BuscarComponent },
+  { path: 'ingresar', component: RegistroComponent },
+  { path: 'editar', component: EditarComponent },
+  {
+    path: 'departamento', component: DepartamentoComponent, children: [
+      { path: 'ciudad/:idDep', component: CiudadComponent }
     ]
   },
-  {path: 'vehiculo', component: VehiculoComponent,children:[
-
-    {path:'agregarVehiculo' , component: AgregarVehiculoComponent }
-  ]},
-  {path: '**', component: BuscarComponent}
+  {
+    path: 'vehiculo', component: VehiculoComponent, children: [
+      { path: 'agregarVehiculo', component: AgregarVehiculoComponent }
+    ]
+  },
+  { path: '**', component: BuscarComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -13,9 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
-import { AgregarVehiculoComponent } from '../app/pages/vehiculo/agregarvehiculo/agregarvehiculo.component'
-
-
+import { AgregarVehiculoComponent } from '../app/pages/vehiculo/agregarvehiculo/agregarvehiculo.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +25,8 @@ import { AgregarVehiculoComponent } from '../app/pages/vehiculo/agregarvehiculo/
     EditarComponent,
     DepartamentoComponent,
     CiudadComponent,
-    VehiculoComponent, 
+    VehiculoComponent,
     AgregarVehiculoComponent
-    
     
   ],
   imports: [
