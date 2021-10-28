@@ -1,36 +1,39 @@
 <div class="example-container">
 
+  <!--[hidden]="route.children.length !== 0 " -->
+  <div *ngIf="isLoggedIn$ | async as isLoggedIn">
+    <mat-toolbar color="accent" class="example-toolbar">
+
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
+        <mat-icon *ngIf="drawer.opened">close</mat-icon>
+      </button>
+      <h1 class="example-app-name">ENVIOS UDEC</h1>
+
+      <span class="example-spacer"></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/perfil']">
+          <mat-icon>account_box</mat-icon>
+          <span>Mi Perfil</span>
+        </button>
+        <button mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn$ | async">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar Sesión</span>
+        </button>
+      </mat-menu>
+
+    </mat-toolbar>
+  </div>
+
+
   <div [hidden]="flagProgressBar">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
-  <mat-toolbar color="primary" class="example-toolbar">
-
-    <button mat-icon-button (click)="drawer.toggle()">
-      <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
-      <mat-icon *ngIf="drawer.opened">close</mat-icon>
-    </button>
-    <h1 class="example-app-name">ENVIOS UDEC</h1>
-
-
-    <span class="example-spacer"></span>
-
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['/perfil']">
-        <mat-icon>account_box</mat-icon>
-        <span>Mi Perfil</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Cerrar Sesión</span>
-      </button>
-    </mat-menu>
-
-
-  </mat-toolbar>
 
   <mat-drawer-container class="example-sidenav-content" autosize>
     <mat-drawer #drawer style="width: 200px" mode="side">
@@ -62,14 +65,19 @@
       <mat-divider></mat-divider>
 
       <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/vehiculo']">
-        <mat-icon>commute</mat-icon>
-        <span>Vehiculo</span>
+        <mat-icon>local_shipping</mat-icon>
+        <span>Vehículo</span>
       </button>
       <mat-divider></mat-divider>
 
     </mat-drawer>
 
     <div class="example-sidenav-content">
+      <!--  
+        <div *ngIf="loaderService.isLoading | async" class="loader-container">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      -->
       <router-outlet></router-outlet>
     </div>
 
