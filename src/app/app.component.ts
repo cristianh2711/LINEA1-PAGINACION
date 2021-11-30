@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service'
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { BarraDeProgresoService} from 'src/app/_service/barra-de-progreso.service'
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from './_service/login.service';
 import { GuardianService } from './_share/guardian.service';
 
@@ -9,43 +9,43 @@ import { GuardianService } from './_share/guardian.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  implements OnInit{
 
   public flagProgressBar: boolean = true;
-  public flagToolbar: boolean = true;
-  valorProgreso: number;
+  public flagToolbar:     boolean = true;
+  valorProgreso : number;
 
   constructor(private barraDeProgresoService: BarraDeProgresoService,
-    private loginService: LoginService,
-    private snackbar: MatSnackBar,
-    private guardian: GuardianService) { }
+              private loginService: LoginService,
+              private snackbar: MatSnackBar,
+              private guardian: GuardianService){}
 
   ngOnInit(): void {
 
-    if (this.loginService.estaLogueado() == true) {
-      this.flagToolbar = false;
-    } else {
-      this.flagToolbar = true;
-    }
+      if(this.loginService.estaLogueado() == true) {
+          this.flagToolbar = false;
+      } else {
+          this.flagToolbar = true;
+      }
 
-    this.loginService.toolBarReactiva.subscribe(data => {
-      this.flagToolbar = data;
-    });
+      this.loginService.toolBarReactiva.subscribe(data =>{
+        this.flagToolbar = data;
+      });
 
-    this.barraDeProgresoService.progressBarReactiva.subscribe(data => {
-      this.flagProgressBar = data;
-      //this.flagProgressBar = !this.flagProgressBar;
-    });
-
+      this.barraDeProgresoService.progressBarReactiva.subscribe(data =>{
+          this.flagProgressBar = data;  
+          //this.flagProgressBar = !this.flagProgressBar;
+      });
+  
   }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     // tslint:disable-next-line: one-variable-per-declaration
     const element = document.documentElement, body = document.body, scrollTop = 'scrollTop',
-      scrollHeight = 'scrollHeight';
+    scrollHeight = 'scrollHeight';
     this.valorProgreso = (element[scrollTop] || body[scrollTop]) /
-      ((element[scrollHeight] || body[scrollHeight]) - element.clientHeight) * 100;
+    ((element[scrollHeight] || body[scrollHeight]) - element.clientHeight) * 100;
   }
 
   onLogout() {

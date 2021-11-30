@@ -1,38 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../_model/usuario.service';
+import { Usuario } from '../_model/usuario';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
-export interface UserInfo {
-  content: Usuario[];
-  pageable: {
-    sort: {
-      sorted: boolean;
-      unsorted: boolean;
-      empty: boolean;
-    };
-    pageNumber: number;
-    pageSize: number;
-    offset: number;
-    paged: number;
-    unpaged: number;
-  };
-  totalPages: number;
-  totalElements: number;
-  last: boolean;
-  sort: {
-    sorted: boolean;
-    unsorted: boolean;
-    empty: boolean;
-  };
-  first: boolean;
-  numberOfElements: number;
-  size: number;
-  number: number;
-  empty: boolean;
-}
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,17 +15,52 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
+  private refreshUser$ = new Subject<void>();
 
-  public listarU(page: number, size: number): Observable<UserInfo> {
-    const rol = 4;
-    let params = new HttpParams();
+  get refresh() {
+    return this.refreshUser$;
+  }
 
-    params = params.append('page', String(page));
-    params = params.append('size', String(size));
-    return this.http.get<any>(`${this.url}/pageable?page=${page}&size=${size}`).pipe(
-      map((uInfo: UserInfo) => uInfo),
-      catchError(err => throwError(err))
+
+  listarU(page: number, size: number) {
+    return this.http.get<any>(`${this.url}/pageablePorRol/4/${page}/${size}`);
+  }
+
+  listarUPorId(idUsuario: number) {
+    return this.http.get<Usuario>(`${this.url}/listar/${idUsuario}`);
+  }
+
+  public guardarUsuario(usuario: Usuario) {
+    return this.http.post(`${this.url}/guardar`, usuario).pipe(
+      tap(() => {
+        this.refreshUser$.next();
+      })
     );
+  }
+
+  public editarUsuario(usuario: Usuario) {
+    return this.http.put(`${this.url}/editar`, usuario).pipe(
+      tap(() => {
+        this.refreshUser$.next();
+      })
+    );
+  }
+
+  public eliminarUsuario(idUsuario: number) {
+    return this.http.delete(`${this.url}/eliminar/${idUsuario}`).pipe(
+      tap(() => {
+        this.refreshUser$.next();
+      })
+    );
+  }
+
+
+  asociados(idVehiculo: number) {
+    return this.http.get<any>(`${this.url}/listarConductorVehiculo/${idVehiculo}`);
+  }
+
+  noAsociados(idVehiculo: number) {
+    return this.http.get<any>(`${this.url}/listarConductorNoVehiculo/${idVehiculo}`);
   }
 
 }
